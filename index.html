@@ -6,64 +6,92 @@
   <title>Romantic Vibes</title>
   <style>
     body {
+      margin: 0;
+      padding: 0;
+      background: #fff0f5;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #f77062, #fe5196);
-      color: white;
-      text-align: center;
-      padding-top: 20%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
     }
-    #startScreen, #mainScreen {
+
+    .start-screen, .animation-screen {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: radial-gradient(circle, #fff0f5, #ffc0cb);
+    }
+
+    .animation-screen {
       display: none;
+      animation: fadeIn 2s ease-in-out;
     }
-    .btn {
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    #line {
+      font-size: 24px;
+      color: #d63384;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 2s ease-in;
+    }
+
+    button {
       padding: 12px 24px;
       font-size: 18px;
-      background-color: #ffffff;
-      color: #fe5196;
       border: none;
-      border-radius: 25px;
+      border-radius: 12px;
+      background-color: #ff69b4;
+      color: white;
       cursor: pointer;
-      transition: 0.3s ease;
     }
-    .btn:hover {
-      background-color: #fcd6e6;
+
+    button:hover {
+      background-color: #ff1493;
     }
   </style>
 </head>
 <body>
-
-  <!-- First screen -->
-  <div id="startScreen">
-    <h1>Tap to Start 💖</h1>
-    <button class="btn" onclick="showMain()">Start</button>
+  <!-- Start screen -->
+  <div class="start-screen">
+    <button onclick="startAnimation()">Tap to Start</button>
   </div>
 
-  <!-- Second screen -->
-  <div id="mainScreen">
-    <h1>Enjoy the Music 🎵</h1>
-    <button class="btn" onclick="playMusic()">Open Vibes</button>
+  <!-- Animation screen -->
+  <div class="animation-screen">
+    <p id="line">Tum aaye toh zindagi muskurane lagi...</p>
   </div>
 
-  <!-- Audio -->
-  <audio id="bgMusic" src="bg-music.m4a" preload="auto"></audio>
+  <!-- Background Music -->
+  <audio id="bgMusic" src="romantic.mp3"></audio>
 
+  <!-- JavaScript -->
   <script>
-    // Show start screen initially
-    document.getElementById("startScreen").style.display = "block";
+    function startAnimation() {
+      document.querySelector(".start-screen").style.display = "none";
+      document.querySelector(".animation-screen").style.display = "flex";
 
-    function showMain() {
-      document.getElementById("startScreen").style.display = "none";
-      document.getElementById("mainScreen").style.display = "block";
-    }
+      // Show text after 1 sec
+      setTimeout(() => {
+        document.getElementById("line").style.opacity = 1;
+      }, 1000);
 
-    function playMusic() {
-      const music = document.getElementById("bgMusic");
-      music.play().catch((err) => {
-        alert("Auto play failed, please allow audio.");
-        console.error(err);
-      });
+      // Change text & play music after 4 sec
+      setTimeout(() => {
+        document.getElementById("line").innerText = "Enjoy the music 🎶";
+        document.getElementById("bgMusic").play();
+      }, 4000);
     }
   </script>
-
 </body>
 </html>
