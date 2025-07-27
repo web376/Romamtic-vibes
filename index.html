@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Romantic Vibes</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f77062, #fe5196);
+      color: white;
+      text-align: center;
+      padding-top: 20%;
+    }
+    #startScreen, #mainScreen {
+      display: none;
+    }
+    .btn {
+      padding: 12px 24px;
+      font-size: 18px;
+      background-color: #ffffff;
+      color: #fe5196;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #fcd6e6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- First screen -->
+  <div id="startScreen">
+    <h1>Tap to Start 💖</h1>
+    <button class="btn" onclick="showMain()">Start</button>
+  </div>
+
+  <!-- Second screen -->
+  <div id="mainScreen">
+    <h1>Enjoy the Music 🎵</h1>
+    <button class="btn" onclick="playMusic()">Open Vibes</button>
+  </div>
+
+  <!-- Audio -->
+  <audio id="bgMusic" src="bg-music.m4a" preload="auto"></audio>
+
+  <script>
+    // Show start screen initially
+    document.getElementById("startScreen").style.display = "block";
+
+    function showMain() {
+      document.getElementById("startScreen").style.display = "none";
+      document.getElementById("mainScreen").style.display = "block";
+    }
+
+    function playMusic() {
+      const music = document.getElementById("bgMusic");
+      music.play().catch((err) => {
+        alert("Auto play failed, please allow audio.");
+        console.error(err);
+      });
+    }
+  </script>
+
+</body>
+</html>
